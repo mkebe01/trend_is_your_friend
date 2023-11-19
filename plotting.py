@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
-datapath = '/Users/mihakebe/data'
+datapath = '/Users/mihakebe/data/'
 
 # Read the CSV files into DataFrames
 weights = pd.read_csv(datapath + 'weights.csv', index_col=0, parse_dates=True)

@@ -5,7 +5,7 @@ tickers = ["SPY", "FEZ", "EWJ", "GLD", "USO", "IEF", "LQD", "FXE", "FXY"]
 start_date = "2007-03-01"
 end_date = "2023-01-01"
 
-datapath = '/Users/mihakebe/data'
+datapath = '/Users/mihakebe/data/'
 
 def fetch_data(ticker, start, end):
     data = yf.download(ticker, start=start, end=end)['Adj Close']
