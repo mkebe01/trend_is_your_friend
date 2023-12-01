@@ -1,0 +1,15 @@
+{
+  "Data": {
+    "start_date": "2007-03-01",
+    "end_date": "2023-01-01"
+  },
+  "Paths": {
+    "datapath": "/Users/mihakebe/data/"
+  },
+  "Tickers": {
+    "tickers": ["SPY", "FEZ", "EWJ", "GLD", "USO", "IEF", "LQD", "FXE", "FXY"],
+    "futures_tickers": ["ES", "CL", "GC", "ZT"]
+  },
+  "risk_budget": {"ES":0.25, "CL":0.25, "GC":0.25, "TY":0.25},
+  "plot_name": "test.pdf"
+}
