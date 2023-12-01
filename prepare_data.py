@@ -12,6 +12,8 @@ end_date = config['Data']['end_date']
 datapath = config['Paths']['datapath']
 tickers = config['Tickers']['tickers']
 
+datapath = '/Users/mihakebe/data/'
+
 def fetch_data(ticker, start, end):
     data = yf.download(ticker, start=start, end=end)['Adj Close']
     return data

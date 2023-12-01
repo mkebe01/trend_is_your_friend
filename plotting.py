@@ -46,6 +46,8 @@ vols = vols * pd.DataFrame(risk_budget, index=vols.index)
 weights = 1/vols
 
 
+datapath = '/Users/mihakebe/data/'
+
 # Read the CSV files into DataFrames
 weights = pd.read_csv(datapath+'weights.csv', index_col=0, parse_dates=True)
 close_prices = pd.read_csv(datapath+'close_prices.csv', index_col=0, parse_dates=True)
@@ -64,8 +66,9 @@ df = pd.DataFrame({'Portfolio Return': portfolio_return})
 df['Cumulative Returns'] = 1+ (df['Portfolio Return']).cumsum()
 df['Rolling Max'] = df['Cumulative Returns'].cummax()
 df['Drawdown'] = (df['Cumulative Returns'] / df['Rolling Max'] - 1) * 100
-df['Rolling Sharpe'] = df['Portfolio Return'].rolling(window=252).mean() / df['Portfolio Return'].rolling(window=252).std() * (252**0.5)  # Annualized
-df['Rolling Vol'] = df['Portfolio Return'].rolling(window=252).std() * (252**0.5)  # Annualized
+df['Rolling Sharpe'] = df['Portfolio Return'].rolling(window=252).mean() / df['Portfolio Return'].rolling(
+    window=252).std() * (252 ** 0.5)  # Annualized
+df['Rolling Vol'] = df['Portfolio Return'].rolling(window=252).std() * (252 ** 0.5)  # Annualized
 
 # Loop through each ticker and create a separate plot for each one
 tickers = close_prices.columns
@@ -84,12 +87,14 @@ with PdfPages(datapath+'backtest_plots.pdf') as pdf:
         ticker_df['Cumulative Returns'] = 1+ (ticker_df['Ticker Return']).cumsum() 
         ticker_df['Rolling Max'] = ticker_df['Cumulative Returns'].cummax()
         ticker_df['Drawdown'] = (ticker_df['Cumulative Returns'] / ticker_df['Rolling Max'] - 1) * 100
-        ticker_df['Rolling Sharpe'] = ticker_df['Ticker Return'].rolling(window=252).mean() / ticker_df['Ticker Return'].rolling(window=252).std() * (252**0.5)  # Annualized
-        ticker_df['Rolling Vol'] = ticker_df['Ticker Return'].rolling(window=252).std() * (252**0.5)  # Annualized
-        ticker_df['Rolling Returns'] = (1 + ticker_df['Ticker Return']).rolling(window=252).apply(lambda x: x.prod()) - 1  # Annualized
+        ticker_df['Rolling Sharpe'] = ticker_df['Ticker Return'].rolling(window=252).mean() / ticker_df[
+            'Ticker Return'].rolling(window=252).std() * (252 ** 0.5)  # Annualized
+        ticker_df['Rolling Vol'] = ticker_df['Ticker Return'].rolling(window=252).std() * (252 ** 0.5)  # Annualized
+        ticker_df['Rolling Returns'] = (1 + ticker_df['Ticker Return']).rolling(window=252).apply(
+            lambda x: x.prod()) - 1  # Annualized
 
         print(ticker_df.head())
-              
+
         # Create the plot
         fig, axs = plt.subplots(7, 1, figsize=(8, 14))
         fig.suptitle(ticker, fontsize=16)
